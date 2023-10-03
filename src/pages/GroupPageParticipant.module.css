@@ -19,7 +19,7 @@
   height: 44px;
 }
 .schedule4Icon {
-  top: 73px;
+  top: 85px;
   height: 959px;
   object-fit: cover;
 }
@@ -104,7 +104,7 @@
 }
 .groupPageParticipant {
   position: relative;
-  width: 100%;
+  width: 640px;
   height: 1652px;
   overflow-y: auto;
   text-align: left;

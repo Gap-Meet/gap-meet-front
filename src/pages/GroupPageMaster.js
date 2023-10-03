@@ -91,7 +91,7 @@ const GroupPageMaster = () => {
       {isGroupMenuMasterOpen && (
         <PortalPopup
           overlayColor="rgba(113, 113, 113, 0.3)"
-          placement="Centered"
+          // placement="TopRight"
           onOutsideClick={closeGroupMenuMaster}
         >
           <GroupMenuMaster onClose={closeGroupMenuMaster} />
@@ -100,7 +100,7 @@ const GroupPageMaster = () => {
       {isMeetingOptionOpen && (
         <PortalPopup
           overlayColor="rgba(113, 113, 113, 0.3)"
-          placement="Centered"
+          // placement="Centerd"
           onOutsideClick={closeMeetingOption}
         >
           <MeetingOption onClose={closeMeetingOption} />

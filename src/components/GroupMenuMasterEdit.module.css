@@ -65,7 +65,9 @@
   height: 25px;
 }
 .groupMenuMasterEdit {
-  position: relative;
+  position: fixed;
+  top:0;
+  right:0;
   background-color: var(--color-ghostwhite-100);
   width: 320px;
   height: 1100px;

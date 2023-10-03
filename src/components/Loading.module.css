@@ -14,7 +14,10 @@
   font-family: var(--font-nexon-lv1-gothic-low-otf);
 }
 .selectBinkani {
-  position: absolute;
+  position: fixed;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
   top: 119px;
   left: 117px;
   width: 173px;
@@ -22,7 +25,10 @@
   object-fit: cover;
 }
 .div {
-  position: absolute;
+  position: fixed;
+  top:60%;
+  left:50%;
+  transform: translate(-50%, -50%);
   /* top: 286px;
   left: 64px; */
   color: var(--color-white);

@@ -95,7 +95,10 @@
   height: 54px;
 }
 .meetingOption {
-  position: relative;
+  position: fixed;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
   background-color: var(--color-ghostwhite-100);
   width: 312px;
   height: 423px;
