@@ -1,0 +1,126 @@
+.bincani {
+  position: absolute;
+  top: 173px;
+  left: 149px;
+  width: 342.42px;
+  height: 350px;
+  object-fit: cover;
+}
+.p {
+  margin: 0;
+}
+.div,
+.groupBlank1 {
+  position: absolute;
+  top: 439px;
+  left: 144px;
+}
+.groupBlank1 {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: var(--color-mediumblue-400);
+  border: 1px solid var(--color-midnightblue-300);
+  box-sizing: border-box;
+}
+.copyButtonChild,
+.urlBlank {
+  position: absolute;
+  top: 509px;
+  left: 120px;
+  width: 292px;
+  height: 54px;
+}
+.copyButtonChild {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: var(--color-midnightblue-100);
+}
+.copyButton,
+.div1 {
+  position: absolute;
+  top: 26.92%;
+  left: 25.8%;
+}
+.copyButton {
+  top: 509px;
+  left: 428px;
+  width: 91px;
+  height: 54px;
+  color: var(--color-white);
+}
+.backArrow2Icon {
+  position: absolute;
+  height: 58.14%;
+  width: 74.32%;
+  top: 20.93%;
+  right: 13.51%;
+  bottom: 20.93%;
+  left: 12.16%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.backButton2 {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.backButton {
+  position: absolute;
+  top: 26px;
+  left: 16px;
+  background-color: var(--color-aliceblue);
+  width: 37px;
+  height: 38px;
+  cursor: pointer;
+}
+.span {
+  color: var(--color-midnightblue-100);
+}
+.div2,
+.div3 {
+  position: absolute;
+}
+.div2 {
+  top: 576px;
+  left: 94px;
+  font-size: var(--font-size-xl);
+  color: var(--color-mediumblue-100);
+}
+.div3 {
+  top: 600px;
+  left: 208px;
+  font-size: var(--font-size-mini);
+  color: rgba(19, 43, 129, 0.72);
+}
+.finishRecruitIcon {
+  position: absolute;
+  top: 759px;
+  left: 259px;
+  width: 123px;
+  height: 53px;
+  cursor: pointer;
+}
+.recruitNewGroup {
+  position: relative;
+  background-color: var(--color-aliceblue);
+  width: 100%;
+  height: 1100px;
+  overflow: hidden;
+  text-align: center;
+  font-size: var(--font-size-5xl);
+  color: var(--color-midnightblue-100);
+  font-family: var(--font-nexon-lv1-gothic-low-otf);
+}

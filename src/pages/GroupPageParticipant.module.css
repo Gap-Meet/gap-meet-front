@@ -1,0 +1,114 @@
+.div {
+  position: absolute;
+  top: 30px;
+  left: 115px;
+  display: inline-block;
+  width: 197px;
+  height: 35px;
+}
+.blind,
+.schedule4Icon {
+  position: absolute;
+  left: 45px;
+  width: 550px;
+}
+.blind {
+  top: 987px;
+  border-radius: 0 0 var(--br-xl) var(--br-xl);
+  background-color: var(--color-white);
+  height: 44px;
+}
+.schedule4Icon {
+  top: 73px;
+  height: 959px;
+  object-fit: cover;
+}
+.menuButtonBack,
+.menuButtonIcon {
+  position: absolute;
+  width: 100%;
+  right: 0;
+  left: 0;
+}
+.menuButtonBack {
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  background-color: var(--color-gray-100);
+}
+.menuButtonIcon {
+  height: 91.89%;
+  top: 5.41%;
+  bottom: 2.7%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.menuButton {
+  position: absolute;
+  top: 32px;
+  left: 570px;
+  width: 35px;
+  height: 37px;
+  cursor: pointer;
+}
+.p {
+  margin: 0;
+}
+.div1 {
+  position: absolute;
+  top: 1583px;
+  left: 123px;
+  font-size: var(--font-size-base);
+  text-align: center;
+}
+.backArrow2Icon,
+.nothingResultBox {
+  position: absolute;
+  top: 1137px;
+  left: 40px;
+  width: 561px;
+  height: 438px;
+}
+.backArrow2Icon {
+  height: 58.14%;
+  width: 74.32%;
+  top: 20.93%;
+  right: 13.51%;
+  bottom: 20.93%;
+  left: 12.16%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.backButton2 {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.backButton,
+.groupPageParticipant {
+  background-color: var(--color-white);
+}
+.backButton {
+  position: absolute;
+  top: 32px;
+  left: 27px;
+  width: 37px;
+  height: 38px;
+  cursor: pointer;
+}
+.groupPageParticipant {
+  position: relative;
+  width: 100%;
+  height: 1652px;
+  overflow-y: auto;
+  text-align: left;
+  font-size: var(--font-size-21xl);
+  color: var(--color-midnightblue-100);
+  font-family: var(--font-nexon-lv1-gothic-low-otf);
+}

@@ -1,0 +1,43 @@
+.bar12 {
+  position: absolute;
+  top: 1px;
+  left: 0;
+  background-color: var(--color-midnightblue-100);
+  width: 320px;
+  height: 42px;
+}
+.div,
+.profileBox {
+  position: absolute;
+  top: 12px;
+  left: 11px;
+}
+.profileBox {
+  height: 6.27%;
+  width: 96.88%;
+  top: 4.36%;
+  right: 1.56%;
+  bottom: 89.36%;
+  left: 1.56%;
+  background-color: var(--color-lightskyblue-100);
+}
+.navyBinkaniIcon {
+  position: absolute;
+  top: 58px;
+  left: 14px;
+  width: 50px;
+  height: 50px;
+}
+.groupMenuParticipant {
+  position: relative;
+  background-color: var(--color-ghostwhite-100);
+  width: 320px;
+  height: 1100px;
+  overflow: hidden;
+  max-width: 100%;
+  max-height: 100%;
+  text-align: left;
+  font-size: var(--font-size-xl);
+  color: var(--color-white);
+  font-family: var(--font-nexon-lv1-gothic-low-otf);
+}
