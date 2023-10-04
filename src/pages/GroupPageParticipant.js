@@ -58,7 +58,7 @@ const GroupPageParticipant = () => {
       {isGroupMenuParticipantOpen && (
         <PortalPopup
           overlayColor="rgba(113, 113, 113, 0.3)"
-          placement="Centered"
+          placement="TopRight"
           onOutsideClick={closeGroupMenuParticipant}
         >
           <GroupMenuParticipant onClose={closeGroupMenuParticipant} />

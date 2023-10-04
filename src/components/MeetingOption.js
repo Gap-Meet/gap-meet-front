@@ -134,7 +134,7 @@ const MeetingOption = () => {
       {isLoadingOpen && (
         <PortalPopup
           overlayColor="rgba(19, 43, 129, 0.4)"
-          placement="Centered"
+          // placement="Centered"
           //onOutsideClick={closeLoading}
         >
           <Loading onClose={closeLoading} />
