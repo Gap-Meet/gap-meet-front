@@ -3,7 +3,10 @@ import JoinFinish1 from "../components/JoinFinish1";
 import PortalPopup from "../components/PortalPopup";
 import { useNavigate } from "react-router-dom";
 import styles from "./Join.module.css";
-import { handleLogin } from './LoginPage';
+import ID_X from "../components/ID_X";
+import ID_O from "../components/ID_O";
+import PW_X from "../components/PW_X";
+import PW_O from "../components/PW_O";
 
 import axios from "axios";
 
@@ -17,7 +20,51 @@ const Join = () => {
   const [error, setError] = useState(null);
 
   const [isJoinFinishOpen, setJoinFinishOpen] = useState(false);
+  const [isID_XOpen, setID_XOpen] = useState(false);
+  const [isID_OOpen, setID_OOpen] = useState(false);
+  const [isPW_XOpen, setPW_XOpen] = useState(false);
+  const [isPW_OOpen, setPW_OOpen] = useState(false);
   const navigate = useNavigate();
+
+  const openJoinFinish = useCallback(() => {
+    setJoinFinishOpen(true);
+  }, []);
+
+  const closeJoinFinish = useCallback(() => {
+    setJoinFinishOpen(false);
+  }, []);
+
+  const openID_X = useCallback(() => {
+    setID_XOpen(true);
+  }, []);
+
+  const closeID_X = useCallback(() => {
+    setID_XOpen(false);
+  }, []);
+  
+  const openID_O = useCallback(() => {
+    setID_OOpen(true);
+  }, []);
+
+  const closeID_O = useCallback(() => {
+    setID_OOpen(false);
+  }, []);
+
+  const openPW_X = useCallback(() => {
+    setPW_XOpen(true);
+  }, []);
+
+  const closePW_X = useCallback(() => {
+    setPW_XOpen(false);
+  }, []);
+  
+  const openPW_O = useCallback(() => {
+    setPW_OOpen(true);
+  }, []);
+
+  const closePW_O = useCallback(() => {
+    setPW_OOpen(false);
+  }, []);
 
   const handleJoin = async () => {
     setError(null); // 에러 초기화
@@ -39,8 +86,14 @@ const Join = () => {
       }
     } catch (err) {  // 오류 발생 시
       console.error('회원가입 실패:', err);
+      
       if (err.response && err.response.data && err.response.data.error) {
-        setError(err.response.data.error);  // 서버에서 전송된 에러 메시지 설정
+        if(err.response.status === 409){
+          setID_XOpen(true);
+        }else{
+          
+          setError(err.response.data.error);  // 서버에서 전송된 에러 메시지 설정
+        }
       } else {
         setError('회원가입 중 오류 발생');  // 일반 에러 메시지 설정
       }
@@ -48,19 +101,68 @@ const Join = () => {
     return false;
   };
 
-  const openJoinFinish = useCallback(() => {
-    setJoinFinishOpen(true);
-  }, []);
+  const same_ID = async () => {
+    setError(null);
 
-  const closeJoinFinish = useCallback(() => {
-    setJoinFinishOpen(false);
-  }, []);
+    try {
+      const response = await axios.post('http://localhost:3000/signup', {  // 서버의 회원가입 endpoint로 POST 요청
+        userid: userid,
+        password: password,
+        password_check: password_check,
+        email: email,
+        username: username,
+      });
+    }
+    catch (err) {  // 오류 발생 시
+      console.error('회원가입 실패:', err);
+      
+      if (err.response && err.response.data && err.response.data.error) {
+        if(err.response.status === 409){
+          setID_XOpen(true);
+        }else{
+          setID_OOpen(true);
+          setError(err.response.data.error);  // 서버에서 전송된 에러 메시지 설정
+        }
+      } else {
+        setError('회원가입 중 오류 발생');  // 일반 에러 메시지 설정
+      }
+    }
+    return false;
+  }
+
+  const same_PW = async () => {
+
+    try{
+      const response = await axios.post('http://localhost:3000/signup', {  // 서버의 회원가입 endpoint로 POST 요청
+        userid: userid,
+        password: password,
+        password_check: password_check,
+        email: email,
+        username: username,
+      });
+    }
+    
+    catch(err) {
+
+    if(err.response.status===400){
+      setPW_XOpen(true);
+    }else{
+      setPW_OOpen(true);
+    }
+  }
+    return false;
+  
+  }
+
+
 
   const onBackButtonContainerClick = useCallback(async () => {
 
       navigate("/login-page");
 
   });
+
+
 
 
   return (
@@ -114,8 +216,8 @@ const Join = () => {
           src="/yes-button.svg"
           onClick={handleJoin} // onClick 이벤트 핸들러로 handleJoin 연결
         />
-        <img className={styles.yesButtonIcon1} alt="" src="/yes-button.svg" />
-        <img className={styles.yesButtonIcon2} alt="" src="/yes-button.svg" />
+        <img className={styles.yesButtonIcon1} alt="" src="/yes-button.svg" onClick={same_ID} />
+        <img className={styles.yesButtonIcon2} alt="" src="/yes-button.svg" onClick={same_PW}/>
         <img className={styles.yesButtonIcon3} alt="" src="/yes-button.svg" />
         <div className={styles.joinBlank}>
           <div className={styles.idBlank2} />
@@ -148,6 +250,43 @@ const Join = () => {
           onOutsideClick={closeJoinFinish}
         >
           <JoinFinish1 onClose={closeJoinFinish} />
+        </PortalPopup>
+      )}
+      {isID_XOpen && (
+        <PortalPopup
+          overlayColor="rgba(113, 113, 113, 0.3)"
+          placement="Centered"
+          onOutsideClick={closeID_X}
+        >
+          <ID_X onClose={closeID_X} />
+        </PortalPopup>
+      )}
+      {isID_OOpen && (
+        <PortalPopup
+          overlayColor="rgba(113, 113, 113, 0.3)"
+          placement="Centered"
+          onOutsideClick={closeID_O}
+        >
+          <ID_O onClose={closeID_O} />
+        </PortalPopup>
+      )}
+
+      {isPW_XOpen && (
+        <PortalPopup
+          overlayColor="rgba(113, 113, 113, 0.3)"
+          placement="Centered"
+          onOutsideClick={closePW_X}
+        >
+          <PW_X onClose={closePW_X} />
+        </PortalPopup>
+      )}
+      {isPW_OOpen && (
+        <PortalPopup
+          overlayColor="rgba(113, 113, 113, 0.3)"
+          placement="Centered"
+          onOutsideClick={closePW_O}
+        >
+          <PW_O onClose={closePW_O} />
         </PortalPopup>
       )}
     </>

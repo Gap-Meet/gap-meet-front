@@ -67,12 +67,12 @@ app.post('/signup', (req, res) => {
             // 중복된 아이디가 이미 존재하는 경우
             if (results.length > 0) {
                 console.log('아이디 중복');
-                res.status(409).send('아이디 중복: 이미 존재하는 아이디입니다.');
+                res.status(409).json({error: 'exist ID already'}); 
             } else {
                 // 중복된 아이디가 없는 경우, 회원가입 쿼리 실행
                 // 중요: password_check는 데이터베이스에 저장하지 않아야 합니다. 비밀번호와 비밀번호 확인이 일치하는지 검사만 하고 저장하지 않습니다.
                 if(password !== password_check) {
-                    return res.status(400).send('비밀번호와 비밀번호 확인이 일치하지 않습니다.'); // 비밀번호 확인
+                    return res.status(400).json({error: 'PW != PW_CHECK'}); // 비밀번호 확인
                 }
                 const insertQuery = 'INSERT INTO users (username, email, user_id, password) VALUES (?, ?, ?, ?)';
                 mysqlConnection.query(insertQuery, [username, email, userid, password], (insertErr, insertResults) => {
@@ -81,7 +81,7 @@ app.post('/signup', (req, res) => {
                         res.status(500).json({ error: 'Internal Server Error' });
                     } else {
                         console.log('회원가입 성공');
-                        res.status(201).send('회원가입 성공');
+                        res.status(201).json('회원가입 성공');
                     }
                 });
             }
