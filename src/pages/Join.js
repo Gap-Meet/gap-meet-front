@@ -3,6 +3,7 @@ import JoinFinish1 from "../components/JoinFinish1";
 import PortalPopup from "../components/PortalPopup";
 import { useNavigate } from "react-router-dom";
 import styles from "./Join.module.css";
+
 import ID_X from "../components/ID_X";
 import ID_O from "../components/ID_O";
 import PW_X from "../components/PW_X";
@@ -10,6 +11,8 @@ import PW_O from "../components/PW_O";
 import Email_X from "../components/Email_X";
 import Email_O from "../components/Email_O";
 import Email_not_correct from "../components/Email_not_correct";
+import PW_not_correct from "../components/PW_not_correct";
+import ID_not_correct from "../components/ID_not_correct";
 
 import axios from "axios";
 
@@ -30,6 +33,8 @@ const Join = () => {
   const [isEmail_XOpen, setEmail_XOpen] = useState(false);
   const [isEmail_OOpen, setEmail_OOpen] = useState(false);
   const [isEmail_not_correctOpen, setEmail_not_correctOpen] = useState(false);
+  const [isPW_not_correctOpen, setPW_not_correctOpen] = useState(false);
+  const [isID_not_correctOpen, setID_not_correctOpen] = useState(false);
   const navigate = useNavigate();
 
   
@@ -91,6 +96,12 @@ const Join = () => {
   const closeEmail_not_correct = useCallback(() => {
     setEmail_not_correctOpen(false);
   }, []);
+  const closePW_not_correct = useCallback(() => {
+    setPW_not_correctOpen(false);
+  }, []);
+  const closeID_not_correct = useCallback(() => {
+    setID_not_correctOpen(false);
+  }, []);
 
 
   const handleJoin = async () => {
@@ -115,12 +126,7 @@ const Join = () => {
       console.error('회원가입 실패:', err);
       
       if (err.response && err.response.data && err.response.data.error) {
-        if(err.response.status === 409){
-          setID_XOpen(true);
-        }else{
-          
-          setError(err.response.data.error);  // 서버에서 전송된 에러 메시지 설정
-        }
+        setError(err.response.data.error);  // 서버에서 전송된 에러 메시지 설정
       } else {
         setError('회원가입 중 오류 발생');  // 일반 에러 메시지 설정
       }
@@ -128,53 +134,84 @@ const Join = () => {
     return false;
   };
 
+  let check_ID_result = true;
+
+  const checkID = (userid) => {
+    var ID_form = /^[a-z0-9]{4,20}$/
+
+    // 형식에 맞는 경우 true 리턴
+    check_ID_result=ID_form.test(userid.target.value)
+    console.log('아이디 유효성 검사 :: ', check_ID_result);
+
+  }
+
+
   const same_ID = async () => {
     setError(null);
-
-    try {
-      const response = await axios.post('http://localhost:3000/signup', {  // 서버의 회원가입 endpoint로 POST 요청
-        userid: userid,
-      });
-    }
-    catch (err) {  // 오류 발생 시
-      console.error('회원가입 실패:', err);
-      
-      if (err.response && err.response.data && err.response.data.error) {
-        if(err.response.status === 409){
-          setID_XOpen(true);
-        }else{
-          setID_OOpen(true);
-          setError(err.response.data.error);  // 서버에서 전송된 에러 메시지 설정
+    if(check_ID_result==false){
+      setID_not_correctOpen(true);
+    }else if(check_ID_result==true){
+      try {
+        const response = await axios.post('http://localhost:3000/signup', {  // 서버의 회원가입 endpoint로 POST 요청
+          userid: userid,
+        });
+      }
+      catch (err) {  // 오류 발생 시
+        console.error('회원가입 실패:', err);
+        
+        if (err.response && err.response.data && err.response.data.error) {
+          if(err.response.status === 409){
+            setID_XOpen(true);
+          }else{
+            setID_OOpen(true);
+            setError(err.response.data.error);  // 서버에서 전송된 에러 메시지 설정
+          }
+        } else {
+          setError('회원가입 중 오류 발생');  // 일반 에러 메시지 설정
         }
-      } else {
-        setError('회원가입 중 오류 발생');  // 일반 에러 메시지 설정
       }
     }
     return false;
   }
 
+  let check_PW_result = true;
+
+  const checkPW = (password) => {
+    var PW_form = /^\d{6}$/
+    // 형식에 맞는 경우 true 리턴
+    check_PW_result=PW_form.test(password.target.value)
+    console.log('비밀번호 유효성 검사 :: ', check_PW_result);
+
+  }
+
   const same_PW = async () => {
+    setError(null);
 
-    try{
-      const response = await axios.post('http://localhost:3000/signup', {  // 서버의 회원가입 endpoint로 POST 요청
-        password: password,
-        password_check: password_check,
-      });
-    }
-    
-    catch(err) {
 
-    if(err.response.status===400){
-      setPW_XOpen(true);
+    if(check_PW_result===false){
+      setPW_not_correctOpen(true);
+      
     }else{
-      setPW_OOpen(true);
-    }
+      try{
+        const response = await axios.post('http://localhost:3000/signup', {  // 서버의 회원가입 endpoint로 POST 요청
+          password: password,
+          password_check: password_check,
+        });
+      }
+      
+      catch(err) {
+        if(err.response.status===400){
+          setPW_XOpen(true);
+        }else{
+          setPW_OOpen(true);
+        }
+      }
   }
     return false;
-  
+
   }
 
-  let check_Email_result = false;
+  let check_Email_result = true;
 
   const checkEmail = (email) => {
     var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i
@@ -184,8 +221,10 @@ const Join = () => {
 
   }
 
-  const same_Email = async () => {
 
+  const same_Email = async () => {
+    setError(null);
+    
     if(check_Email_result===false){
       setEmail_not_correctOpen(true);
     }else{   
@@ -209,6 +248,7 @@ const Join = () => {
         }
       }
     }
+    return false;
   }
 
 
@@ -232,7 +272,7 @@ const Join = () => {
           사용할 비밀번호를 입력해주세요(숫자 6자리)
         </div>
         <div className={styles.div2}>비밀번호를 다시 입력해주세요</div>
-        <div className={styles.div3}>사용할 아이디를 입력해주세요</div>
+        <div className={styles.div3}>사용할 아이디를 입력해주세요(알파벳, 숫자를 사용한 4~20자)</div>
         <div className={styles.div4}>이름</div>
         <div className={styles.div5}>성함을 입력해주세요</div>
         <div className={styles.div6}>이메일</div>
@@ -244,11 +284,14 @@ const Join = () => {
           type="userid"
           value={userid}  // 상태값과 연결
           onChange={(e) => setUserid(e.target.value)}  // 변경사항을 상태에 반영
+          onBlur={checkID}
         />
         <input className={styles.joinPW} 
           type="password" 
           value={password}  // 상태값과 연결 
-          onChange={(e) => setPassword(e.target.value)}  // 변경사항을 상태에 반영
+          onChange={(e) => setPassword(e.target.value)} 
+          onBlur={checkPW} 
+          // 변경사항을 상태에 반영
         />
         <input className={styles.checkPW}
           type="password_check" 
@@ -372,6 +415,24 @@ const Join = () => {
           onOutsideClick={closeEmail_not_correct}
         >
           <Email_not_correct onClose={closeEmail_not_correct} />
+        </PortalPopup>
+      )}
+      {isPW_not_correctOpen && (
+        <PortalPopup
+          overlayColor="rgba(113, 113, 113, 0.3)"
+          placement="Centered"
+          onOutsideClick={closePW_not_correct}
+        >
+          <PW_not_correct onClose={closePW_not_correct} />
+        </PortalPopup>
+      )}
+      {isID_not_correctOpen && (
+        <PortalPopup
+          overlayColor="rgba(113, 113, 113, 0.3)"
+          placement="Centered"
+          onOutsideClick={closeID_not_correct}
+        >
+          <ID_not_correct onClose={closeID_not_correct} />
         </PortalPopup>
       )}
     </>

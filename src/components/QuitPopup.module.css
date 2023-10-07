@@ -29,15 +29,14 @@
 }
 .groupBlank1 {
   position: absolute;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  top: 69px;
+  left: 7px;
+  width: 271px;
+  height: 31px;
   background-color: var(--color-mediumblue-400);
   border: 1px solid var(--color-midnightblue-300);
   box-sizing: border-box;
+  font-size : 23px;
 }
 .blank {
   position: absolute;

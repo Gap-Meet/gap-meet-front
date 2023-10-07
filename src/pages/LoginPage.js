@@ -30,8 +30,8 @@ const LoginPage = () => {
 
       // 토큰을 로컬 스토리지에 저장합니다.
       if (response.data.token) {
-        localStorage.setItem('userToken', response.data.token);
-        console.log('로그인 성공!');
+        localStorage.setItem('userToken', response);
+        console.log('로그인 성공!', response);
         return true; // 로그인 성공 여부를 반환
         
         // 로그인 성공 후, 다음 페이지로 이동하거나 원하는 작업을 수행할 수 있습니다.
@@ -91,34 +91,3 @@ const LoginPage = () => {
 
 export default LoginPage;
 
-export const handleLogin = async () => {
-  e && e.preventDefault(); // e가 존재할 경우에만 preventDefault를 실행
-  setError(null); // 에러 초기화
-
-  try {
-    // 로그인 요청을 보냅니다.
-    // 일단은 로컬서버로 요청
-    const response = await axios.post('/login', {
-      userid: userid, // 이메일을 userid로 사용하거나 필요에 따라 수정
-      password: password,
-    });
-
-    // 토큰을 로컬 스토리지에 저장합니다.
-    if (response.data.token) {
-      localStorage.setItem('userToken', response.data.token);
-      console.log('로그인 성공!');
-      return true; // 로그인 성공 여부를 반환
-      
-      // 로그인 성공 후, 다음 페이지로 이동하거나 원하는 작업을 수행할 수 있습니다.
-      // 예: navigate("/dashboard");
-    }
-  } catch (err) {
-    // 로그인 실패
-    if (err.response && err.response.data && err.response.data.error) {
-      setError(err.response.data.error);
-    } else {
-      setError('로그인 중 오류 발생');
-    }
-  }
-  return false;
-};
