@@ -170,7 +170,7 @@ const Join = () => {
 
   const same_Email = async () => {
 
-
+    
     try{
       const response = await axios.post('http://localhost:3000/signup', {  // 서버의 회원가입 endpoint로 POST 요청
         email: email,
@@ -192,11 +192,13 @@ const Join = () => {
     }
   }
 
-    const checkEmail = (e) => {
-        var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i
-        // 형식에 맞는 경우 true 리턴
-        console.log('이메일 유효성 검사 :: ', regExp.test(e.target.value))
-    }
+  const checkEmail = (e) => {
+      var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i
+      // 형식에 맞는 경우 true 리턴
+      console.log('이메일 유효성 검사 :: ', regExp.test(e.target.value));
+
+      return regExp.test(e.target.value);
+  }
 
   const onBackButtonContainerClick = useCallback(async () => {
 
@@ -249,7 +251,7 @@ const Join = () => {
           type="email" 
           value={email}  // 상태값과 연결
           onChange={(e) => setEmail(e.target.value)}  // 변경사항을 상태에 반영
-          // onBlur={checkEmail} 
+          onBlur={checkEmail} 
         />
 
 
