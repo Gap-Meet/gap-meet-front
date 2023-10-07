@@ -9,6 +9,7 @@ import PW_X from "../components/PW_X";
 import PW_O from "../components/PW_O";
 import Email_X from "../components/Email_X";
 import Email_O from "../components/Email_O";
+import Email_not_correct from "../components/Email_not_correct";
 
 import axios from "axios";
 
@@ -28,9 +29,10 @@ const Join = () => {
   const [isPW_OOpen, setPW_OOpen] = useState(false);
   const [isEmail_XOpen, setEmail_XOpen] = useState(false);
   const [isEmail_OOpen, setEmail_OOpen] = useState(false);
+  const [isEmail_not_correctOpen, setEmail_not_correctOpen] = useState(false);
   const navigate = useNavigate();
 
-  const emailRegEx = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i;
+  
 
   const openJoinFinish = useCallback(() => {
     setJoinFinishOpen(true);
@@ -86,6 +88,10 @@ const Join = () => {
   const closeEmail_O = useCallback(() => {
     setEmail_OOpen(false);
   }, []);
+  const closeEmail_not_correct = useCallback(() => {
+    setEmail_not_correctOpen(false);
+  }, []);
+
 
   const handleJoin = async () => {
     setError(null); // 에러 초기화
@@ -168,37 +174,44 @@ const Join = () => {
   
   }
 
+  let check_Email_result = false;
+
+  const checkEmail = (email) => {
+    var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i
+    // 형식에 맞는 경우 true 리턴
+    check_Email_result=regExp.test(email.target.value)
+    console.log('이메일 유효성 검사 :: ', check_Email_result);
+
+  }
+
   const same_Email = async () => {
 
-    
-    try{
-      const response = await axios.post('http://localhost:3000/signup', {  // 서버의 회원가입 endpoint로 POST 요청
-        email: email,
-      });
-    }
-    catch(err) {
-      console.error('회원가입 실패:', err);
-      
-      if (err.response && err.response.data && err.response.data.error) {
-        if(err.response.status === 409){
-          setEmail_XOpen(true);
-        }else{
-          setEmail_OOpen(true);
-          setError(err.response.data.error);  // 서버에서 전송된 에러 메시지 설정
+    if(check_Email_result===false){
+      setEmail_not_correctOpen(true);
+    }else{   
+      try{
+        const response = await axios.post('http://localhost:3000/signup', {  // 서버의 회원가입 endpoint로 POST 요청
+          email: email,
+        });
+      }
+      catch(err) {
+        console.error('회원가입 실패:', err);
+        
+        if (err.response && err.response.data && err.response.data.error) {
+          if(err.response.status === 409){
+            setEmail_XOpen(true);
+          }else{
+            setEmail_OOpen(true);
+            setError(err.response.data.error);  // 서버에서 전송된 에러 메시지 설정
+          }
+        } else {
+          setError('회원가입 중 오류 발생');  // 일반 에러 메시지 설정
         }
-      } else {
-        setError('회원가입 중 오류 발생');  // 일반 에러 메시지 설정
       }
     }
   }
 
-  const checkEmail = (e) => {
-      var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i
-      // 형식에 맞는 경우 true 리턴
-      console.log('이메일 유효성 검사 :: ', regExp.test(e.target.value));
 
-      return regExp.test(e.target.value);
-  }
 
   const onBackButtonContainerClick = useCallback(async () => {
 
@@ -350,6 +363,15 @@ const Join = () => {
           onOutsideClick={closeEmail_O}
         >
           <Email_O onClose={closeEmail_O} />
+        </PortalPopup>
+      )}
+      {isEmail_not_correctOpen && (
+        <PortalPopup
+          overlayColor="rgba(113, 113, 113, 0.3)"
+          placement="Centered"
+          onOutsideClick={closeEmail_not_correct}
+        >
+          <Email_not_correct onClose={closeEmail_not_correct} />
         </PortalPopup>
       )}
     </>
