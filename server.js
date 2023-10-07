@@ -52,41 +52,46 @@ app.post('/login', (req, res) => {
 });
 
 
-// 회원가입 요청을 처리하는 라우트
+
 app.post('/signup', (req, res) => {
-    const { username, email, userid, password, password_check } = req.body; // password_check를 여기에 추가
-    console.log(req.body);
-    
-    // 입력한 아이디를 사용하여 사용자 조회 쿼리
-    const checkQuery = 'SELECT * FROM users WHERE user_id = ?';
-    mysqlConnection.query(checkQuery, [userid], (err, results) => {
+    const { username, email, userid, password, password_check } = req.body;
+
+    if(password !== password_check) {
+        console.log('비밀번호가 일치하지 않습니다.')
+        return res.status(400).json({error: '비밀번호가 일치하지 않습니다.'}); 
+    }
+
+    const checkQuery = 'SELECT * FROM users WHERE user_id = ? OR email = ?';
+    mysqlConnection.query(checkQuery, [userid, email], (err, results) => {
         if (err) {
             console.error('MySQL query error: ', err);
-            res.status(500).json({ error: 'Internal Server Error' });
-        } else {
-            // 중복된 아이디가 이미 존재하는 경우
-            if (results.length > 0) {
-                console.log('아이디 중복');
-                res.status(409).json({error: 'exist ID already'}); 
-            } else {
-                // 중복된 아이디가 없는 경우, 회원가입 쿼리 실행
-                // 중요: password_check는 데이터베이스에 저장하지 않아야 합니다. 비밀번호와 비밀번호 확인이 일치하는지 검사만 하고 저장하지 않습니다.
-                if(password !== password_check) {
-                    return res.status(400).json({error: 'PW != PW_CHECK'}); // 비밀번호 확인
-                }
-                const insertQuery = 'INSERT INTO users (username, email, user_id, password) VALUES (?, ?, ?, ?)';
-                mysqlConnection.query(insertQuery, [username, email, userid, password], (insertErr, insertResults) => {
-                    if (insertErr) {
-                        console.error('MySQL query error: ', insertErr);
-                        res.status(500).json({ error: 'Internal Server Error' });
-                    } else {
-                        console.log('회원가입 성공');
-                        res.status(201).json('회원가입 성공');
-                    }
-                });
+            console.log('내부 서버 오류')
+            return res.status(500).json({ error: '내부 서버 오류' });
+        }
+
+        for(let result of results){
+            if(result.user_id === userid){
+                console.log('이미 존재하는 사용자 ID입니다.')
+                return res.status(409).json({error: '이미 존재하는 사용자 ID입니다.'});
+            }
+            if(result.email === email){
+                console.log('이미 존재하는 이메일 주소입니다.')
+                return res.status(409).json({error: '이미 존재하는 이메일 주소입니다.'});
             }
         }
+
+        const insertQuery = 'INSERT INTO users (username, email, user_id, password) VALUES (?, ?, ?, ?)';
+        // 패스워드 암호화 코드 추가 (예: bcrypt를 사용하여 패스워드 암호화)
+        mysqlConnection.query(insertQuery, [username, email, userid, password], (insertErr, insertResults) => {
+            if (insertErr) {
+                console.error('MySQL query error: ', insertErr);
+                return res.status(500).json({ error: '내부 서버 오류' });
+            }
+            console.log('회원가입 성공');
+            res.status(201).json('회원가입 성공');
+        });
     });
 });
+
 
 app.listen(3000, () => console.log('3000번 포트 대기'));

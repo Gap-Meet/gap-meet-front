@@ -1,9 +1,9 @@
 .div {
   position: absolute;
   top: 70px;
-  left: 11px;
+  left: 32px;
 }
-.changePwX {
+.Email_O {
   position: relative;
   background-color: var(--color-gray-300);
   width: 284px;

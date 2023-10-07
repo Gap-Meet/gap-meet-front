@@ -7,6 +7,8 @@ import ID_X from "../components/ID_X";
 import ID_O from "../components/ID_O";
 import PW_X from "../components/PW_X";
 import PW_O from "../components/PW_O";
+import Email_X from "../components/Email_X";
+import Email_O from "../components/Email_O";
 
 import axios from "axios";
 
@@ -24,7 +26,11 @@ const Join = () => {
   const [isID_OOpen, setID_OOpen] = useState(false);
   const [isPW_XOpen, setPW_XOpen] = useState(false);
   const [isPW_OOpen, setPW_OOpen] = useState(false);
+  const [isEmail_XOpen, setEmail_XOpen] = useState(false);
+  const [isEmail_OOpen, setEmail_OOpen] = useState(false);
   const navigate = useNavigate();
+
+  const emailRegEx = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i;
 
   const openJoinFinish = useCallback(() => {
     setJoinFinishOpen(true);
@@ -64,6 +70,21 @@ const Join = () => {
 
   const closePW_O = useCallback(() => {
     setPW_OOpen(false);
+  }, []);
+  const openEmail_X = useCallback(() => {
+    setEmail_XOpen(true);
+  }, []);
+
+  const closeEmail_X = useCallback(() => {
+    setEmail_XOpen(false);
+  }, []);
+  
+  const openEmail_O = useCallback(() => {
+    setEmail_OOpen(true);
+  }, []);
+
+  const closeEmail_O = useCallback(() => {
+    setEmail_OOpen(false);
   }, []);
 
   const handleJoin = async () => {
@@ -107,10 +128,6 @@ const Join = () => {
     try {
       const response = await axios.post('http://localhost:3000/signup', {  // 서버의 회원가입 endpoint로 POST 요청
         userid: userid,
-        password: password,
-        password_check: password_check,
-        email: email,
-        username: username,
       });
     }
     catch (err) {  // 오류 발생 시
@@ -134,11 +151,8 @@ const Join = () => {
 
     try{
       const response = await axios.post('http://localhost:3000/signup', {  // 서버의 회원가입 endpoint로 POST 요청
-        userid: userid,
         password: password,
         password_check: password_check,
-        email: email,
-        username: username,
       });
     }
     
@@ -154,7 +168,35 @@ const Join = () => {
   
   }
 
+  const same_Email = async () => {
 
+
+    try{
+      const response = await axios.post('http://localhost:3000/signup', {  // 서버의 회원가입 endpoint로 POST 요청
+        email: email,
+      });
+    }
+    catch(err) {
+      console.error('회원가입 실패:', err);
+      
+      if (err.response && err.response.data && err.response.data.error) {
+        if(err.response.status === 409){
+          setEmail_XOpen(true);
+        }else{
+          setEmail_OOpen(true);
+          setError(err.response.data.error);  // 서버에서 전송된 에러 메시지 설정
+        }
+      } else {
+        setError('회원가입 중 오류 발생');  // 일반 에러 메시지 설정
+      }
+    }
+  }
+
+    const checkEmail = (e) => {
+        var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i
+        // 형식에 맞는 경우 true 리턴
+        console.log('이메일 유효성 검사 :: ', regExp.test(e.target.value))
+    }
 
   const onBackButtonContainerClick = useCallback(async () => {
 
@@ -207,6 +249,7 @@ const Join = () => {
           type="email" 
           value={email}  // 상태값과 연결
           onChange={(e) => setEmail(e.target.value)}  // 변경사항을 상태에 반영
+          // onBlur={checkEmail} 
         />
 
 
@@ -218,7 +261,7 @@ const Join = () => {
         />
         <img className={styles.yesButtonIcon1} alt="" src="/yes-button.svg" onClick={same_ID} />
         <img className={styles.yesButtonIcon2} alt="" src="/yes-button.svg" onClick={same_PW}/>
-        <img className={styles.yesButtonIcon3} alt="" src="/yes-button.svg" />
+        <img className={styles.yesButtonIcon3} alt="" src="/yes-button.svg" onClick={same_Email}/>
         <div className={styles.joinBlank}>
           <div className={styles.idBlank2} />
         </div>
@@ -287,6 +330,24 @@ const Join = () => {
           onOutsideClick={closePW_O}
         >
           <PW_O onClose={closePW_O} />
+        </PortalPopup>
+      )}
+      {isEmail_XOpen && (
+        <PortalPopup
+          overlayColor="rgba(113, 113, 113, 0.3)"
+          placement="Centered"
+          onOutsideClick={closeEmail_X}
+        >
+          <Email_X onClose={closeEmail_X} />
+        </PortalPopup>
+      )}
+      {isEmail_OOpen && (
+        <PortalPopup
+          overlayColor="rgba(113, 113, 113, 0.3)"
+          placement="Centered"
+          onOutsideClick={closeEmail_O}
+        >
+          <Email_O onClose={closeEmail_O} />
         </PortalPopup>
       )}
     </>
