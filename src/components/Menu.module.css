@@ -1,0 +1,60 @@
+.bar2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--color-midnightblue-100);
+  width: 312px;
+  height: 42px;
+}
+.div,
+.navyBinkani1 {
+  position: absolute;
+  top: 10px;
+  left: 137px;
+}
+.navyBinkani1 {
+  top: 54px;
+  left: 18px;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  cursor: pointer;
+}
+.alarmBlock1,
+.helloUser1,
+.logout1Icon,
+.profile1Icon {
+  position: absolute;
+  top: 44px;
+  left: 1px;
+  width: 310px;
+  height: 69px;
+  object-fit: cover;
+}
+.alarmBlock1,
+.logout1Icon,
+.profile1Icon {
+  top: 115px;
+  height: 40px;
+  cursor: pointer;
+}
+.alarmBlock1,
+.logout1Icon {
+  top: 157px;
+}
+.logout1Icon {
+  top: 199px;
+}
+.menu {
+  position: relative;
+  background-color: var(--color-ghostwhite-100);
+  width: 312px;
+  height: 423px;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: auto;
+  text-align: left;
+  font-size: var(--font-size-xl);
+  color: var(--color-white);
+  font-family: var(--font-nexon-lv1-gothic-low-otf);
+}

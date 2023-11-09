@@ -1,0 +1,222 @@
+.div,
+.id,
+.pw {
+  position: absolute;
+  top: 246px;
+  left: 235px;
+  font-size: var(--font-size-29xl);
+}
+.id,
+.pw {
+  top: 346px;
+  left: 111px;
+  font-size: var(--font-size-13xl);
+}
+.pw {
+  top: 435px;
+  left: 89px;
+}
+
+.div1,
+.div2,
+.div3 {
+  position: absolute;
+  top: 483px;
+  left: 154px;
+  color: var(--color-midnightblue-200);
+}
+.div2,
+.div3 {
+  top: 573px;
+}
+.div3 {
+  top: 393px;
+}
+.div4,
+.div5 {
+  display: inline-block;
+}
+.div4 {
+  position: absolute;
+  top: 616px;
+  left: 84px;
+  font-size: var(--font-size-13xl);
+  width: 62px;
+}
+.div5 {
+  top: 663px;
+  left: 154px;
+  color: var(--color-midnightblue-200);
+  width: 142px;
+}
+.div5,
+.div6,
+.div7 {
+  position: absolute;
+}
+.div6 {
+  top: 705px;
+  left: 53px;
+  font-size: var(--font-size-13xl);
+}
+.div7 {
+  top: 753px;
+  left: 154px;
+  color: var(--color-midnightblue-200);
+  display: inline-block;
+  width: 229px;
+}
+.yesButtonIcon {
+  position: absolute;
+  top: 806px;
+  left: 280px;
+  width: 91px;
+  height: 54px;
+  cursor: pointer;
+}
+.idBlank2,
+.yesButtonIcon1,
+.yesButtonIcon2,
+.yesButtonIcon3 {
+  position: absolute;
+  top: 338px;
+  left: 495px;
+  width: 91px;
+  height: 54px;
+}
+.idBlank2,
+.yesButtonIcon2,
+.yesButtonIcon3 {
+  top: 518px;
+}
+.idBlank2,
+.yesButtonIcon3 {
+  top: 696px;
+}
+.idBlank2 {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border: 1px solid var(--color-mediumblue-200);
+  box-sizing: border-box;
+}
+.joinBlank {
+  position: absolute;
+  top: 337px;
+  left: 154px;
+  width: 330px;
+  height: 54px;
+}
+.backArrow2Icon,
+.joinBlank1,
+.joinBlank2,
+.joinBlank3,
+.joinBlank4 {
+  position: absolute;
+  top: 427px;
+  left: 154px;
+  width: 330px;
+  height: 54px;
+}
+.backArrow2Icon,
+.joinBlank2,
+.joinBlank3,
+.joinBlank4 {
+  top: 517px;
+}
+.backArrow2Icon,
+.joinBlank3,
+.joinBlank4 {
+  top: 607px;
+}
+.backArrow2Icon,
+.joinBlank4 {
+  top: 697px;
+}
+.backArrow2Icon {
+  height: 58.14%;
+  width: 74.32%;
+  top: 20.93%;
+  right: 13.51%;
+  bottom: 20.93%;
+  left: 12.16%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.backButton2 {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.backButton,
+.join {
+  background-color: var(--color-white);
+}
+.backButton {
+  position: absolute;
+  top: 22px;
+  left: 16px;
+  width: 37px;
+  height: 38px;
+  cursor: pointer;
+}
+.join {
+  position: relative;
+  width: 100%;
+  height: 1100px;
+  overflow: hidden;
+  text-align: left;
+  font-size: var(--font-size-base);
+  color: var(--color-midnightblue-100);
+  font-family: var(--font-nexon-lv1-gothic-low-otf);
+}
+
+
+
+
+
+/* <추가사항> */
+
+.joinID,
+.joinPW,
+.checkPW,
+.joinName,
+.joinEmail{
+  position : absolute;
+  left: 154px;
+  border: 2px solid var(--color-mediumblue-200);
+  box-sizing: border-box;
+  width: 330px;
+  height: 54px;
+  font-size : 23px;
+  z-index :1;
+
+}
+
+.joinID{  
+  top: 337px;
+}
+
+.joinPW{
+  top: 427px;
+}
+
+.checkPW{ 
+  top: 517px;
+}
+
+.joinName{
+  top: 607px;
+}
+
+.joinEmail{
+  top: 697px;
+}

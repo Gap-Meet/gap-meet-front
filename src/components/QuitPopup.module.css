@@ -1,0 +1,61 @@
+.div {
+  top: 48px;
+  left: 55px;
+}
+.bar15,
+.div,
+.div1 {
+  position: absolute;
+}
+.bar15 {
+  top: 0;
+  left: 0;
+  background-color: var(--color-midnightblue-100);
+  width: 284px;
+  height: 32px;
+}
+.div1 {
+  top: 8px;
+  left: 112px;
+  color: var(--color-white);
+}
+.yesButton2Icon {
+  position: absolute;
+  top: 116px;
+  left: 113px;
+  width: 59px;
+  height: 36px;
+  cursor: pointer;
+}
+.groupBlank1 {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: var(--color-mediumblue-400);
+  border: 1px solid var(--color-midnightblue-300);
+  box-sizing: border-box;
+}
+.blank {
+  position: absolute;
+  top: 69px;
+  left: 7px;
+  width: 271px;
+  height: 31px;
+}
+.quitPopup {
+  position: relative;
+  background-color: var(--color-gray-300);
+  width: 284px;
+  height: 163px;
+  overflow: hidden;
+  max-width: 100%;
+  max-height: 100%;
+  text-align: center;
+  font-size: var(--font-size-base);
+  color: var(--color-black);
+  font-family: var(--font-nexon-lv1-gothic-low-otf);
+}
