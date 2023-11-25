@@ -110,6 +110,8 @@
   position: absolute;
   top: 24.39%;
   left: 15.52%;
+  cursor: pointer;
+  z-index : 0;
 }
 .timeSelectButton,
 .timeSelectButton1,
@@ -202,4 +204,76 @@
   font-size: var(--font-size-xl);
   color: var(--color-midnightblue-100);
   font-family: var(--font-nexon-lv1-gothic-low-otf);
+}
+
+
+
+.schedule {
+  /* position: relative; */
+  background-color: var(--color-white);
+  width: 100%;
+  /* height: 114px; */
+  height : 120px;
+  overflow: hidden;
+  text-align: left;
+  font-size: var(--font-size-21xl);
+  color: var(--color-midnightblue-100);
+  font-family: var(--font-nexon-lv1-gothic-low-otf);
+}
+
+
+.Table {
+  position : absolute;
+  border-collapse: collapse;
+  /* border: 1px solid #ffffff; */
+  height : 910px;
+  top : 79px;
+  left : 30px;
+  width: 541.5px;
+  /* width: 23.5%; */
+  background: transparent; /* 셀 배경을 투명하게 설정 */
+  color: transparent; /* Make font color transparent */
+}
+
+.Table td {
+  /* border: 1px solid #ffffff; */
+  /* border: 1px; */
+  padding: 6.71px;
+  width: 5px; 
+  text-align: center;
+  background: transparent; /* 셀 배경을 투명하게 설정 */
+  color: transparent; /* Make font color transparent */
+  /* border: 1px solid rgb(255, 0, 0); */
+ 
+}
+
+/* 왼쪽상단 구석 1,1 부터
+  즉 2, 2부터 월 00시간대   행, 열 순서.
+  행은 2 ~ 25
+  열은 2 ~ 8     */
+
+  /* 
+	n은 0부터 시작하여 증가하고 +2연산이 있으므로
+	2행부터 모든 행에 아래의 스타일을 적용합니다.
+  */
+
+.Table tr:nth-child(n+2) td:nth-child(2),
+.Table tr:nth-child(n+2) td:nth-child(3),
+.Table tr:nth-child(n+2) td:nth-child(4),
+.Table tr:nth-child(n+2) td:nth-child(5),
+.Table tr:nth-child(n+2) td:nth-child(6),
+.Table tr:nth-child(n+2) td:nth-child(7),
+.Table tr:nth-child(n+2) td:nth-child(8){
+  border: 1px solid rgb(137, 137, 137);
+  background-color: rgb(237, 241, 255);
+}
+
+
+.Table tr:nth-child(3) td:nth-child(8){
+  background-color: rgb(38, 66, 167);
+}
+
+
+.scheduleActive {
+  background-color: #ffff99 !important; /* 배경색 변경 */
 }

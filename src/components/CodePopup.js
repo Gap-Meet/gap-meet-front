@@ -11,6 +11,17 @@ const CodePopup = () => {
         <div className={styles.groupBlank2} />
       </div>
       <img className={styles.yesButton2Icon} alt="" src="/yes-button21.svg" />
+
+  		
+      <div className={styles.Blank1} > 
+	  			<input className ={styles.GroupName}
+		  		  type = "name"
+		  		></input>   
+          <input className ={styles.GroupPW}
+				    type = "password"
+				  ></input>   
+		  </div>
+
     </div>
   );
 };

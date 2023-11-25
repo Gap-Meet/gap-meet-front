@@ -1,25 +1,14 @@
-.div {
+.div1 {
   position: absolute;
-  top: 67px;
-  left: 41px;
+  top: 59px;
+  left: 72px;
 }
-.bar11,
-.yesButton2Icon {
+.div2 {
   position: absolute;
-  top: 109px;
-  left: 112px;
-  width: 59px;
-  height: 36px;
-  cursor: pointer;
+  top: 82px;
+  left: 61px;
 }
-.bar11 {
-  top: 0;
-  left: 0;
-  background-color: var(--color-midnightblue-100);
-  width: 284px;
-  height: 32px;
-}
-.logoutPopup {
+.PW_not_correct {
   position: relative;
   background-color: var(--color-gray-300);
   width: 284px;

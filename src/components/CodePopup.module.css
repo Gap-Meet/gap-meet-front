@@ -61,3 +61,23 @@
   color: var(--color-midnightblue-100);
   font-family: var(--font-nexon-lv1-gothic-low-otf);
 }
+
+
+.GroupName,
+.GroupPW{
+  position: relative;
+  background-color: var(--color-aliceblue);
+  border: 1px solid var(--color-mediumblue-200);
+  top : 57px;
+  left : 35px;
+  width: 178px;
+  height: 23px;
+  font-size : 16px;
+  text-align: center;
+  overflow: hidden;
+  z-index : 1;
+}
+
+.GroupPW{
+  top : 63px;
+}

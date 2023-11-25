@@ -1,25 +1,9 @@
 .div {
   position: absolute;
-  top: 67px;
-  left: 41px;
+  top: 70px;
+  left: 32px;
 }
-.bar11,
-.yesButton2Icon {
-  position: absolute;
-  top: 109px;
-  left: 112px;
-  width: 59px;
-  height: 36px;
-  cursor: pointer;
-}
-.bar11 {
-  top: 0;
-  left: 0;
-  background-color: var(--color-midnightblue-100);
-  width: 284px;
-  height: 32px;
-}
-.logoutPopup {
+.Email_O {
   position: relative;
   background-color: var(--color-gray-300);
   width: 284px;

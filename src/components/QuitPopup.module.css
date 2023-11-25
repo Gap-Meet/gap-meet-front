@@ -59,3 +59,13 @@
   color: var(--color-black);
   font-family: var(--font-nexon-lv1-gothic-low-otf);
 }
+
+
+.CheckPW{
+  position : relative;
+  top : -94px;
+  left : 6px;
+  height : 26px;
+  width : 265px;
+  z-index : 1;
+}

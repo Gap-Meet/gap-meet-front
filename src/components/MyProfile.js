@@ -129,12 +129,17 @@ const MyProfile = ({ onClose }) => {
         </div>
 
         <div className={styles.blank4}>
-          <div className={styles.groupBlank1} />
+          <div className={styles.groupBlank12} />
+	  			<input className ={styles.Email}
+		  		  type = "email"
+		  		></input>
         </div>
 
         <div className={styles.blank5}>
           <div className={styles.groupBlank12} />
-
+	  			<input className ={styles.Nickname}
+		  		  type = "name"
+		  		></input>
         </div>
 
         <img

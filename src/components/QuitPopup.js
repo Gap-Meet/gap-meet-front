@@ -30,6 +30,7 @@ const QuitPopup = () => {
           <div className={styles.groupBlank1} />
         </div>
       </div>
+
       {isQuitCheckOpen && (
         <PortalPopup
           overlayColor="rgba(113, 113, 113, 0.3)"
@@ -39,6 +40,12 @@ const QuitPopup = () => {
           <QuitCheck onClose={closeQuitCheck} />
         </PortalPopup>
       )}
+      
+      <div className={styles.PWblank} > 
+	  			<input className ={styles.CheckPW}
+		  		  type = "password"
+		  		></input>   
+		  </div>
     </>
   );
 };

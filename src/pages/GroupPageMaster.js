@@ -30,6 +30,38 @@ const GroupPageMaster = () => {
     navigate("/schedule");
   }, [navigate]);
 
+
+  /* 임시 색 바꾸기 함수 테스트. */
+  const changeColors = useCallback((rowIndex, colIndex) => {
+    // Get all table rows
+    const rows = document.querySelectorAll(`.${styles.Table} tr`);
+  
+    // Loop through each row
+    rows.forEach((row, i) => {
+      // Check if it's the specified row
+      if (i === rowIndex) {
+        // Get all cells in the row
+        const cells = row.querySelectorAll('td');
+  
+        // Loop through each cell
+        cells.forEach((cell, j) => {
+          // Check if it's the specified column
+          if (j === colIndex) {
+            // Apply the style change
+            cell.style.backgroundColor = 'rgb(38, 66, 167)';
+          }
+        });
+      }
+    });
+  }, []);
+
+  // 요일과 시간에 따라 스케줄에 클래스를 추가하는 함수
+  const getScheduleClass = (day, hour) => {
+   
+  };
+
+
+
   return (
     <>
       <div className={styles.groupPageMaster}>
@@ -51,6 +83,32 @@ const GroupPageMaster = () => {
           src="/vector.svg"
           onClick={openMeetingOption}
         />
+
+        <table className={styles.Table}>
+          <tr>
+            <td></td>
+            <td>월</td>
+            <td>화</td>
+            <td>수</td>
+            <td>목</td>
+            <td>금</td>
+            <td>토</td>
+            <td>일</td>
+          </tr>
+        {[...Array(24)].map((_, hour) => (
+          <tr key={hour}>
+            <td>{hour.toString().padStart(2, '0')}</td>
+              {['월', '화', '수', '목', '금', '토', '일'].map((day, index) => (
+              <td key={index} className={getScheduleClass(day, hour)}>
+              {/* 여기에 해당하는 스케줄의 데이터를 표시할 수 있음 */}
+            </td>
+          ))}
+          </tr>
+        ))}
+    </table>
+
+
+        {/* 모임시간 정하기 버튼 : openMeetingOption */}
         <div className={styles.resultBox} />
         <div className={styles.div1}>
           <p className={styles.p}>
@@ -63,16 +121,28 @@ const GroupPageMaster = () => {
         <div className={styles.div4}>요일 00:00~00:00</div>
         <div className={styles.timeSelectButton}>
           <div className={styles.timeSelectButtonChild} />
-          <div className={styles.div5}>선택</div>
+            <div className={styles.div5} onClick={() => changeColors(3, 4)}>
+              선택
+            </div>
         </div>
+              {/*div5가 아래 선택지버튼.
+              sever 쪽은  src/algorithm   
+              click 버튼 눌리면 -> 선택했다는 것을 백으로 넘겨주기.
+              */}
+
+
         <div className={styles.timeSelectButton1}>
           <div className={styles.timeSelectButtonChild} />
-          <div className={styles.div5}>선택</div>
+          <div className={styles.div5} onClick={openMeetingOption}>
+            선택</div>
         </div>
+
         <div className={styles.timeSelectButton2}>
           <div className={styles.timeSelectButtonChild} />
-          <div className={styles.div5}>선택</div>
+          <div className={styles.div5} onClick={openMeetingOption}>
+            선택</div>
         </div>
+        
         <div className={styles.div8}>명이 만날 수 있어요</div>
         <div className={styles.div9}>명이 만날 수 있어요</div>
         <div className={styles.div10}>명이 만날 수 있어요</div>
@@ -106,6 +176,8 @@ const GroupPageMaster = () => {
           <MeetingOption onClose={closeMeetingOption} />
         </PortalPopup>
       )}
+
+
     </>
   );
 };
