@@ -91,10 +91,10 @@
 }
 .div3,
 .div4 {
-  top: 1439px;
+  top: 1333px;
 }
 .div4 {
-  top: 1333px;
+  top: 1439px
 }
 .timeSelectButtonChild {
   position: absolute;
@@ -218,6 +218,7 @@
   text-align: left;
   font-size: var(--font-size-21xl);
   color: var(--color-midnightblue-100);
+  
   font-family: var(--font-nexon-lv1-gothic-low-otf);
 }
 
@@ -268,10 +269,6 @@
   background-color: rgb(237, 241, 255);
 }
 
-
-.Table tr:nth-child(3) td:nth-child(8){
-  background-color: rgb(38, 66, 167);
-}
 
 
 .scheduleActive {

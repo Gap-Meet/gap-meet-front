@@ -30,27 +30,70 @@ const GroupPageMaster = () => {
     navigate("/schedule");
   }, [navigate]);
 
+  const myArray = [
+    // Row 0
+    [
+      {"day": "월", "s_time": 12, "e_time": 14}
+    ],
+    // Row 1
+    [
+      {"day": "화", "s_time": 13, "e_time": 17}
+    ],
+    // Row 2
+    [
+      {"day": "수", "s_time": 3, "e_time": 12}
+    ]
+  ];
 
-  /* 임시 색 바꾸기 함수 테스트. */
-  const changeColors = useCallback((rowIndex, colIndex) => {
-    // Get all table rows
+
+  const getIndex = useCallback((option) => {
+    const currentDay = myArray[option][0].day;
+    let day, st, et;
+    if (currentDay === "월") {
+        day = 1;
+    } else if (currentDay === "화") {
+        day = 2;
+    } else if (currentDay === "수") {
+        day = 3;
+    } else if (currentDay === "목") {
+        day = 4;
+    } else if (currentDay === "금") {
+        day = 5;
+    } else if (currentDay === "토") {
+        day = 6;
+    } else if (currentDay === "일") {
+        day = 7;
+    }
+    else{
+      day=-1;
+    }
+
+    for (let i = 0; i < 24; i++) {
+        if (myArray[option][0].s_time === i) {
+            st = i+1;
+        }
+        if (myArray[option][0].e_time === i) {
+            et = i+1;
+            break;
+        }
+    }
+    changeColors(day, st, et);
+  });
+
+
+  /* 색 바꾸기 함수 */
+  const changeColors = useCallback((colIndex, rowIndex1, rowIndex2) => {
     const rows = document.querySelectorAll(`.${styles.Table} tr`);
   
     // Loop through each row
     rows.forEach((row, i) => {
-      // Check if it's the specified row
-      if (i === rowIndex) {
-        // Get all cells in the row
+      if (i === rowIndex1 || (rowIndex1<=i && i<rowIndex2)) {
         const cells = row.querySelectorAll('td');
-  
-        // Loop through each cell
         cells.forEach((cell, j) => {
-          // Check if it's the specified column
           if (j === colIndex) {
-            // Apply the style change
             cell.style.backgroundColor = 'rgb(38, 66, 167)';
           }
-        });
+        }); 
       }
     });
   }, []);
@@ -60,7 +103,23 @@ const GroupPageMaster = () => {
    
   };
 
-
+  const text = [
+    // Row 0
+    [
+      myArray[0][0].day + "요일 " + myArray[0][0].s_time+":00~"
+       + myArray[0][0].e_time+":00"
+    ],
+    // Row 1
+    [
+      myArray[1][0].day + "요일 " + myArray[1][0].s_time+":00~"
+       + myArray[1][0].e_time+":00"
+    ],
+    // Row 2
+    [
+      myArray[2][0].day + "요일 " + myArray[2][0].s_time+":00~"
+       + myArray[2][0].e_time+":00"
+    ]
+  ];
 
   return (
     <>
@@ -116,12 +175,12 @@ const GroupPageMaster = () => {
           </p>
           <p className={styles.p}>모임장만 버튼을 누를 수 있습니다.</p>
         </div>
-        <div className={styles.div2}>요일 00:00~00:00</div>
-        <div className={styles.div3}>요일 00:00~00:00</div>
-        <div className={styles.div4}>요일 00:00~00:00</div>
+        <div className={styles.div2}>{text[0]}</div>
+        <div className={styles.div3}>{text[1]}</div>
+        <div className={styles.div4}>{text[2]}</div>
         <div className={styles.timeSelectButton}>
           <div className={styles.timeSelectButtonChild} />
-            <div className={styles.div5} onClick={() => changeColors(3, 4)}>
+            <div className={styles.div5} onClick={() => getIndex(0)}>
               선택
             </div>
         </div>
@@ -133,13 +192,13 @@ const GroupPageMaster = () => {
 
         <div className={styles.timeSelectButton1}>
           <div className={styles.timeSelectButtonChild} />
-          <div className={styles.div5} onClick={openMeetingOption}>
+          <div className={styles.div5} onClick={() => getIndex(1)}>
             선택</div>
         </div>
 
         <div className={styles.timeSelectButton2}>
           <div className={styles.timeSelectButtonChild} />
-          <div className={styles.div5} onClick={openMeetingOption}>
+          <div className={styles.div5} onClick={() => getIndex(2)}>
             선택</div>
         </div>
         
