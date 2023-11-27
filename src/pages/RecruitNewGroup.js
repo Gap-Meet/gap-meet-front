@@ -1,6 +1,7 @@
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./RecruitNewGroup.module.css";
+import { useState } from "react";
 import PortalPopup from "../components/PortalPopup";
 import JoinFinish from "../components/JoinFinish";
 
@@ -111,6 +112,7 @@ const RecruitNewGroup = () => {
     } catch (err) {
       //오류 발생시
       console.error("모임 생성 실패 : ", err);
+
       setError("모임생성 중 오류 발생"); // 일반 에러 메시지 설정
     }
     return false;
@@ -222,7 +224,7 @@ const RecruitNewGroup = () => {
         className={styles.finishbuttonIcon}
         alt=""
         src="/finishbutton.svg"
-        onClick={openJoinFinish}
+        onClick={handlefinishbutton}
       />
       {isJoinFinishOpen && (
         <PortalPopup
