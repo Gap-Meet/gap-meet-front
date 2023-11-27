@@ -20,14 +20,15 @@ const MeetingOption = () => {
   //------------------------------------
   const openLoading = useCallback(() => {
     // 평일? 주말?
-    const selectedDayType = document.querySelector('select[name="weekday"]').value;
+    const selectedDayType = document.querySelector(`.${styles.weekday}`).value;
+    //const selectedDayType = selectedDayTypeElement.options[selectedDayTypeElement.selectedIndex].text;
 
     // 몇 시부터 몇 시까지
-    const selectedStartTime = document.querySelector('select.hour1').value;
-    const selectedEndTime = document.querySelector('select[name="hour2"]').value;
+    const selectedStartTime = document.querySelector(`.${styles.hour1}`).value.split('-')[1];
+    const selectedEndTime = document.querySelector(`.${styles.hour2}`).value.split('-')[1];
 
     // 몇 시간 정도를?
-    const selectedMeetingTime = document.querySelector('select.hour3').value;
+    const selectedMeetingTime = document.querySelector(`.${styles.hour3}`).value.split('-')[1];
 
     const StartTime = selectedStartTime + ":00:00";
     const EndTime = selectedEndTime + ":00:00";
@@ -47,7 +48,7 @@ const MeetingOption = () => {
     console.log(selectedOptions);
 
     axios
-      .post("http://localhost:3000/api/group/groupoption", selectedOptions)
+      .get("http://localhost:3000/api/group/meettime", selectedOptions)
       .then((response) => {
         console.log("데이터 전송 성공", response.data);
         // 여기서 다른 로직 처리 또는 화면 업데이트
@@ -102,8 +103,8 @@ const MeetingOption = () => {
         <div className={styles.optionSelectButton}>
           <div className={styles.optionSelectButtonChild}>
             <select className={styles.weekday}>
-              <option value="day-item">평일</option>
-              <option value="day-item">주말</option>
+              <option value="평일">평일</option>
+              <option value="주말">주말</option>
             </select>
           </div>
           <img
@@ -117,7 +118,7 @@ const MeetingOption = () => {
           <div className={styles.optionSelectButtonChild}>
             <select className={styles.hour1}>
               {['-', ...Array(24).keys()].map((hour) => (
-                <option key={hour} value={`hour-menu1-${hour}`}>
+                <option key={hour} value={`hour_menu1-${hour}`}>
                   {hour < 10 ? `0${hour}` : hour}
                 </option>
               ))}
@@ -135,7 +136,7 @@ const MeetingOption = () => {
             <select className={styles.hour2}>
               {['-', ...Array(25).keys()].map((hour) => (
                 hour !== 0 && (
-                <option key={hour} value={`hour-menu1-${hour}`}>
+                <option key={hour} value={`hour_menu1-${hour}`}>
                   {hour < 10 ? `0${hour}` : hour}
                 </option>
                 )
@@ -153,7 +154,7 @@ const MeetingOption = () => {
           <div className={styles.optionSelectButtonChild}>
             <select className={styles.hour3}>
               {['-', ...Array(24).keys()].map((hour) => (
-                <option key={hour} value={`hour-menu1-${hour}`}>
+                <option key={hour} value={`hour_menu1-${hour}`}>
                   {hour < 10 ? `0${hour}` : hour}
                 </option>
               ))}

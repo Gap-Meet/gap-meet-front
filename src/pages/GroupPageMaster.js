@@ -33,15 +33,15 @@ const GroupPageMaster = () => {
   const myArray = [
     // Row 0
     [
-      {"day": "월", "s_time": 12, "e_time": 14}
+      {"day": "월", "s_time": 12, "e_time": 14, "num":3}
     ],
     // Row 1
     [
-      {"day": "화", "s_time": 13, "e_time": 17}
+      {"day": "화", "s_time": 13, "e_time": 17, "num":5}
     ],
     // Row 2
     [
-      {"day": "수", "s_time": 3, "e_time": 12}
+      {"day": "목", "s_time": 16, "e_time": 18, "num":2}
     ]
   ];
 
@@ -104,21 +104,18 @@ const GroupPageMaster = () => {
   };
 
   const text = [
-    // Row 0
-    [
-      myArray[0][0].day + "요일 " + myArray[0][0].s_time+":00~"
-       + myArray[0][0].e_time+":00"
-    ],
-    // Row 1
-    [
-      myArray[1][0].day + "요일 " + myArray[1][0].s_time+":00~"
-       + myArray[1][0].e_time+":00"
-    ],
-    // Row 2
-    [
-      myArray[2][0].day + "요일 " + myArray[2][0].s_time+":00~"
-       + myArray[2][0].e_time+":00"
-    ]
+    [ myArray[0][0].day + "요일 " + myArray[0][0].s_time+":00~"
+       + myArray[0][0].e_time+":00"],
+    [ myArray[1][0].day + "요일 " + myArray[1][0].s_time+":00~"
+       + myArray[1][0].e_time+":00"],
+    [ myArray[2][0].day + " 요일 " + myArray[2][0].s_time+":00~"
+       + myArray[2][0].e_time+":00"]
+  ];
+
+  const text2 = [
+    [myArray[0][0].num + "명이 만날 수 있어요"],
+    [myArray[1][0].num + "명이 만날 수 있어요"],
+    [myArray[2][0].num + "명이 만날 수 있어요"]
   ];
 
   return (
@@ -202,9 +199,9 @@ const GroupPageMaster = () => {
             선택</div>
         </div>
         
-        <div className={styles.div8}>명이 만날 수 있어요</div>
-        <div className={styles.div9}>명이 만날 수 있어요</div>
-        <div className={styles.div10}>명이 만날 수 있어요</div>
+        <div className={styles.div8}>{text2[0]}</div>
+        <div className={styles.div9}>{text2[1]}</div>
+        <div className={styles.div10}>{text2[2]}</div>
         <img className={styles.stTime1} alt="" src="/1st-time-1@2x.png" />
         <img className={styles.ndTime1} alt="" src="/2nd-time-1@2x.png" />
         <img className={styles.rdTime1} alt="" src="/3rd-time-1@2x.png" />
