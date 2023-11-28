@@ -84,6 +84,7 @@
   left: 12px;
   width: 25px;
   height: 25px;
+  cursor: pointer;
 }
 .menuAlarm {
   position: relative;

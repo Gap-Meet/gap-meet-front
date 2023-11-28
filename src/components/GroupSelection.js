@@ -1,16 +1,17 @@
 import { useState, useCallback } from "react";
 import CodePopup from "./CodePopup";
-import PortalPopup from "./PortalPopup"; 
+import PortalPopup from "./PortalPopup";
 import { useNavigate } from "react-router-dom";
 import styles from "./GroupSelection.module.css";
 import { closeGroupSelection } from "./TSWho";
 
-const GroupSelection = ({onClose}) => {
+const GroupSelection = ({ groupNames, onClose }) => {
+  console.log("그룹이름디버깅:" + groupNames);
   const [isCodePopupOpen, setCodePopupOpen] = useState(false);
   const navigate = useNavigate();
   const handlecloseGroupSelection = () => {
     closeGroupSelection(onClose);
-  }
+  };
 
   const onGroupBlankContainerClick = useCallback(() => {
     navigate("/group-page-master");
@@ -45,7 +46,7 @@ const GroupSelection = ({onClose}) => {
         <div className={styles.groupBlank3}>
           <div className={styles.groupBlank12} />
         </div>
-        <div className={styles.backButton2} onClick ={handlecloseGroupSelection}>
+        <div className={styles.backButton2} onClick={handlecloseGroupSelection}>
           <div className={styles.backButton2Child} />
           <img className={styles.backButton2Item} alt="" src="/arrow-1.svg" />
         </div>

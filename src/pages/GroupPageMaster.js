@@ -5,6 +5,17 @@ import MeetingOption from "../components/MeetingOption";
 import { useNavigate } from "react-router-dom";
 import styles from "./GroupPageMaster.module.css";
 
+
+// export { scheduleAlgorithm };
+// import { scheduleAlgorithm } from "./GroupPageMaster";
+// // import해 온 Total 시간표에 대한 값에서 정보추출(인원, 시간)
+// const schedules = 
+// const condition = 
+// const result = scheduleAlgorithm(schedules, condition);
+// // Total 시간표 정보에서 추천정보 받아오기.
+// //console.log(result);
+
+
 const GroupPageMaster = () => {
   const [isGroupMenuMasterOpen, setGroupMenuMasterOpen] = useState(false);
   const [isMeetingOptionOpen, setMeetingOptionOpen] = useState(false);
@@ -30,10 +41,12 @@ const GroupPageMaster = () => {
     navigate("/schedule");
   }, [navigate]);
 
+
+
   const myArray = [
     // Row 0
     [
-      {"day": "월", "s_time": 0, "e_time": 24, "num":3}
+      {"day": "월", "s_time": 12, "e_time": 24, "num":14}
     ],
     // Row 1
     [
@@ -41,42 +54,46 @@ const GroupPageMaster = () => {
     ],
     // Row 2
     [
-      {"day": "목", "s_time": 16, "e_time": 18, "num":2}
+      {"day": "목", "s_time": 3, "e_time": 12, "num":2}
     ]
   ];
 
-
   const getIndex = useCallback((option) => {
-    const currentDay = myArray[option][0].day;
-    let day, st, et;
-    if (currentDay === "월") {
-        day = 1;
-    } else if (currentDay === "화") {
-        day = 2;
-    } else if (currentDay === "수") {
-        day = 3;
-    } else if (currentDay === "목") {
-        day = 4;
-    } else if (currentDay === "금") {
-        day = 5;
-    } else if (currentDay === "토") {
-        day = 6;
-    } else if (currentDay === "일") {
-        day = 7;
-    }
-    else{
-      day=-1;
-    }
+    // const currentDay = myArray[option][0].day;
+    // let day, st, et;
+    // if (currentDay === "월") {
+    //     day = 1;
+    // } else if (currentDay === "화") {
+    //     day = 2;
+    // } else if (currentDay === "수") {
+    //     day = 3;
+    // } else if (currentDay === "목") {
+    //     day = 4;
+    // } else if (currentDay === "금") {
+    //     day = 5;
+    // } else if (currentDay === "토") {
+    //     day = 6;
+    // } else if (currentDay === "일") {
+    //     day = 7;
+    // }
+    // else{
+    //   day=-1;
+    // }
 
-    for (let i = 0; i <= 24; i++) {
-        if (myArray[option][0].s_time === i) {
-            st = i+1;
-        }
-        if (myArray[option][0].e_time === i) {
-            et = i+1;
-            break;
-        }
-    }
+    // for (let i = 0; i <= 24; i++) {
+    //     if (myArray[option][0].s_time === i) {
+    //         st = i+1;
+    //     }
+    //     if (myArray[option][0].e_time === i) {
+    //         et = i+1;
+    //         break;
+    //     }
+    // }
+
+    const day=result[option].day_of_weak;
+    const st=result[option].start;
+    const et=result[option].end;
+
     changeColors(day, st, et);
   });
 

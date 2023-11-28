@@ -132,12 +132,12 @@ const GroupPageParticipant = () => {
           </p>
           <p className={styles.p}>모임장만 버튼을 누를 수 있습니다.</p>
         </div>
-        <div className={styles.div2}>요일 00:00~00:00</div>
-        <div className={styles.div3}>요일 00:00~00:00</div>
-        <div className={styles.div4}>요일 00:00~00:00</div>
-        <div className={styles.div8}>명이 만날 수 있어요</div>
-        <div className={styles.div9}>명이 만날 수 있어요</div>
-        <div className={styles.div10}>명이 만날 수 있어요</div>
+        <div className={styles.div2}>{text[0]}</div>
+        <div className={styles.div3}>{text[1]}</div>
+        <div className={styles.div4}>{text[2]}</div>
+        <div className={styles.div8}>{text2[0]}</div>
+        <div className={styles.div9}>{text2[1]}</div>
+        <div className={styles.div10}>{text2[2]}</div>
         <img className={styles.stTime1} alt="" src="/1st-time-1@2x.png" />
         <img className={styles.ndTime1} alt="" src="/2nd-time-1@2x.png" />
         <img className={styles.rdTime1} alt="" src="/3rd-time-1@2x.png" />

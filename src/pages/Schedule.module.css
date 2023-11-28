@@ -44,6 +44,7 @@
   left: 492px;
   width: 30.87px;
   height: 40.5px;
+  cursor : pointer;
 }
 .menuButtonBack,
 .menuButtonIcon {
@@ -74,6 +75,8 @@
   height: 37px;
   cursor: pointer;
 }
+
+
 .schedule {
   /* position: relative; */
   background-color: var(--color-white);

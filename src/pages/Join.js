@@ -7,6 +7,8 @@ import ID_X from "../components/ID_X";
 import ID_O from "../components/ID_O";
 import PW_X from "../components/PW_X";
 import PW_O from "../components/PW_O";
+import Email_X from "../components/Email_X"
+import Email_O from "../components/Email_O"
 
 import axios from "axios";
 
@@ -19,10 +21,18 @@ const Join = () => {
   const [error, setError] = useState(null);
 
   const [isJoinFinish1Open, setJoinFinish1Open] = useState(false);
+  /* 아이디 */
   const [isID_XOpen, setID_XOpen] = useState(false);
   const [isID_OOpen, setID_OOpen] = useState(false);
+
+  /* 비밀번호 */
   const [isPW_XOpen, setPW_XOpen] = useState(false);
   const [isPW_OOpen, setPW_OOpen] = useState(false);
+
+  /* 이메일 */
+  const [isEmail_XOpen, setEmail_XOpen] = useState(false);
+  const [isEmail_OOpen, setEmail_OOpen] = useState(false);
+
   const navigate = useNavigate();
 
   const openJoinFinish1 = useCallback(() => {
@@ -33,21 +43,51 @@ const Join = () => {
     setJoinFinish1Open(false);
   }, []);
 
-  const openID_X = useCallback(() => {
-    setID_XOpen(true);
-  }, []);
+      /* 이메일 */
+    // Email_X 오픈
+    const openEmail_X = useCallback(() => {
+      setEmail_XOpen(true);
+    }, []);
+  
+    // Email_X 닫음
+    const closeEmail_X = useCallback(() => {
+      setEmail_XOpen(false);
+    }, []);
+  
+    //Email_O 오픈
+    const openEmail_O = useCallback(() => {
+      setEmail_OOpen(true);
+    }, []);
+  
+    //Email_O 닫음
+    const closeEmail_O = useCallback(() => {
+      setEmail_OOpen(false);
+    }, []);
+  
 
-  const closeID_X = useCallback(() => {
-    setID_XOpen(false);
-  }, []);
+    /* 아이디 */
+    // ID_X 오픈
+    const openID_X = useCallback(() => {
+      setID_XOpen(true);
+    }, []);
+  
+    // ID_X 닫음
+    const closeID_X = useCallback(() => {
+      setID_XOpen(false);
+    }, []);
+  
+    //ID_O 오픈
+    const openID_O = useCallback(() => {
+      setID_OOpen(true);
+    }, []);
+  
+    //ID_O 닫음
+    const closeID_O = useCallback(() => {
+      setID_OOpen(false);
+    }, []);
+  
 
-  const openID_O = useCallback(() => {
-    setID_OOpen(true);
-  }, []);
-
-  const closeID_O = useCallback(() => {
-    setID_OOpen(false);
-  }, []);
+  /* 비밀번호 */
 
   // PW_X 오픈
   const openPW_X = useCallback(() => {
@@ -131,6 +171,8 @@ const Join = () => {
       // 오류 발생 시
       console.error("회원가입 실패:", err);
       setError("회원가입 중 오류 발생"); // 일반 에러 메시지 설정
+      setID_OOpen(false); // setPW_OOpen 팝업 닫기
+      setID_XOpen(true); // 다른 경우 setPW_XOpen 팝업 열기
     }
     return false;
   };
@@ -147,15 +189,17 @@ const Join = () => {
         }
       );
       if (response3.status === 409) {
-        setID_XOpen(true);
+        setEmail_XOpen(true);
       } else if (response3.status === 200) {
-        setID_OOpen(true);
+        setEmail_OOpen(true);
         setError(response3.data.error); // 서버에서 전송된 에러 메시지 설정
       }
     } catch (err) {
       // 오류 발생 시
       console.error("회원가입 실패:", err);
       setError("회원가입 중 오류 발생"); // 일반 에러 메시지 설정
+      setEmail_OOpen(false); // 
+      setEmail_XOpen(true); // 
     }
     return false;
   };
@@ -306,6 +350,25 @@ const Join = () => {
           onOutsideClick={closePW_O}
         >
           <PW_O onClose={closePW_O} />
+        </PortalPopup>
+      )}
+
+      {isEmail_XOpen && (
+        <PortalPopup
+          overlayColor="rgba(113, 113, 113, 0.3)"
+          placement="Centered"
+          onOutsideClick={closeEmail_X}
+        >
+          <Email_X onClose={closeEmail_X} />
+        </PortalPopup>
+      )}
+      {isEmail_OOpen && (
+        <PortalPopup
+          overlayColor="rgba(113, 113, 113, 0.3)"
+          placement="Centered"
+          onOutsideClick={closeEmail_O}
+        >
+          <Email_O onClose={closeEmail_O} />
         </PortalPopup>
       )}
     </>

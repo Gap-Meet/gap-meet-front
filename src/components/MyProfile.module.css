@@ -111,12 +111,12 @@
   position: absolute;
   width: 52px;
   height: 31px;
+  cursor: pointer;
 }
 .yesButton2Icon {
   top: 249px;
   left: 240px;
   overflow: hidden;
-  cursor: pointer;
 }
 .saveButtonIcon {
   top: 5px;
@@ -151,13 +151,13 @@
   left: 12px;
   width: 25px;
   height: 25px;
+  cursor: pointer;
 }
 .quitUserIcon {
   top: 415px;
   left: 119px;
   width: 75px;
   height: 31px;
-  cursor: pointer;
 }
 .myProfile {
   position: relative;

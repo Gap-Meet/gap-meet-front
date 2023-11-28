@@ -13,7 +13,7 @@ const QuitCheck = () => {
     <div className={styles.quitCheck}>
       <div className={styles.div}>탈퇴하시겠습니까?</div>
       <img
-        className={styles.yesButton2Icon}
+        className={styles.yesButton2Icon}z1
         alt=""
         src="/yes-button2.svg"
         onClick={onYesButton2Click}

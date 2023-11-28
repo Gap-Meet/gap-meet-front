@@ -6,13 +6,16 @@ import Menu from "../components/Menu";
 import AddSDPopup from "../components/AddSDPopup";
 import { useNavigate } from "react-router-dom";
 import styles from "./Schedule.module.css";
+import Alarm from "../components/MenuAlarm";
 
 const Schedule = () => {
   const [isHowToOpen, setHowToOpen] = useState(false);
   const [isTSWhoOpen, setTSWhoOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const [isOpenAlarm, setAlarmOpen] = useState(false);
   const [isAddSDPopupOpen, setAddSDPopupOpen] = useState(false);
   const [schedules, setSchedules] = useState([]);
+  
   const navigate = useNavigate();
 
   const addSchedule = useCallback((newSchedule) => {
@@ -31,7 +34,6 @@ const Schedule = () => {
       timeString < schedule.end_time // 해당 시간이 종료 시간 이전인지 확인 (end_time을 포함하지 않음)
     );
     
-  
     // Return the appropriate class
     return isActive ? styles.scheduleActive : "";
   };
@@ -72,6 +74,14 @@ const Schedule = () => {
     setAddSDPopupOpen(false);
   }, []);
 
+  const openAlarm=useCallback(()=>{
+    setAlarmOpen(true);
+  }, []);
+
+  const closeAlarm=useCallback(()=>{
+    setAlarmOpen(false);
+  }, []);
+
   
   return (
     <>
@@ -96,7 +106,7 @@ const Schedule = () => {
           onClick={openTSWho}
         />
         <img className={styles.schedule1Icon} alt="" src="/schedule-4@2x.png" />
-        <img className={styles.alarm1Icon} alt="" src="/alarm-3@2x.png" />
+        <img className={styles.alarm1Icon} alt="" src="/alarm-3@2x.png" onClick={openAlarm}/>
         <div className={styles.menuButton} onClick={openMenu}>
           <div className={styles.menuButtonBack} />
           <img
@@ -131,6 +141,15 @@ const Schedule = () => {
           onOutsideClick={closeMenu}
         >
           <Menu onClose={closeMenu} />
+        </PortalPopup>
+      )}
+      {isOpenAlarm && (
+        <PortalPopup
+          overlayColor="rgba(113, 113, 113, 0.3)"
+          placement="Centered"
+          onOutsideClick={closeAlarm}
+        >
+          <Alarm onClose={closeAlarm}/>
         </PortalPopup>
       )}
       {isAddSDPopupOpen && (

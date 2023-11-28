@@ -5,10 +5,10 @@ import { useState } from "react";
 import PortalPopup from "../components/PortalPopup";
 import JoinFinish from "../components/JoinFinish";
 
-import PW_X from "../components/PW_X";
-import PW_O from "../components/PW_O";
-import ID_X from "../components/ID_X";
-import ID_O from "../components/ID_O";
+import CODE_X from "../components/CODE_X";
+import CODE_O from "../components/CODE_O";
+import NAME_X from "../components/NAME_X";
+import NAME_O from "../components/NAME_O";
 
 import axios from "axios";
 
@@ -31,62 +31,62 @@ const RecruitNewGroup = () => {
   //추가
   const [error, setError] = useState(null);
 
-  const [isPW_XOpen, setPW_XOpen] = useState(false);
-  const [isPW_OOpen, setPW_OOpen] = useState(false);
-  const [isID_XOpen, setID_XOpen] = useState(false);
-  const [isID_OOpen, setID_OOpen] = useState(false);
+  const [isCODE_XOpen, setCODE_XOpen] = useState(false);
+  const [isCODE_OOpen, setCODE_OOpen] = useState(false);
+  const [isNAME_XOpen, setNAME_XOpen] = useState(false);
+  const [isNAME_OOpen, setNAME_OOpen] = useState(false);
 
   const [group_name, setGroup_name] = useState("");
   const [group_code, setGroup_code] = useState("");
   const [group_Recode, setGroup_Recode] = useState("");
 
-  // PW_X 오픈
-  const openPW_X = useCallback(() => {
-    setPW_XOpen(true);
+  // CODE_X 오픈
+  const openCODE_X = useCallback(() => {
+    setCODE_XOpen(true);
   }, []);
 
-  // PW_X 닫음
-  const closePW_X = useCallback(() => {
-    setPW_XOpen(false);
+  // CODE_X 닫음
+  const closeCODE_X = useCallback(() => {
+    setCODE_XOpen(false);
   }, []);
 
-  //PW_O 오픈
-  const openPW_O = useCallback(() => {
-    setPW_OOpen(true);
+  //CODE_O 오픈
+  const openCODE_O = useCallback(() => {
+    setCODE_OOpen(true);
   }, []);
 
-  //PW_O 닫음
-  const closePW_O = useCallback(() => {
-    setPW_OOpen(false);
+  //CODE_O 닫음
+  const closeCODE_O = useCallback(() => {
+    setCODE_OOpen(false);
   }, []);
 
   //모임 이름 동일한지
-  const openID_X = useCallback(() => {
-    setID_XOpen(true);
+  const openNAME_X = useCallback(() => {
+    setNAME_XOpen(true);
   }, []);
 
-  const closeID_X = useCallback(() => {
-    setID_XOpen(false);
+  const closeNAME_X = useCallback(() => {
+    setNAME_XOpen(false);
   }, []);
 
-  const openID_O = useCallback(() => {
-    setID_OOpen(true);
+  const openNAME_O = useCallback(() => {
+    setNAME_OOpen(true);
   }, []);
 
-  const closeID_O = useCallback(() => {
-    setID_OOpen(false);
+  const closeNAME_O = useCallback(() => {
+    setNAME_OOpen(false);
   }, []);
 
   //두 개의 비밀 코드가 동일한지 얜 yesbutton2
   const handleYesButton = () => {
     console.log("잘 되나");
     if (group_code === group_Recode) {
-      setPW_OOpen(true); // 동일한 경우 setPW_OOpen 팝업 열기
-      setPW_XOpen(false); // setPW_XOpen 팝업 닫기
+      setCODE_OOpen(true); // 동일한 경우 setPW_OOpen 팝업 열기
+      setCODE_XOpen(false); // setPW_XOpen 팝업 닫기
       console.log("맞음");
     } else {
-      setPW_OOpen(false); // setPW_OOpen 팝업 닫기
-      setPW_XOpen(true); // 다른 경우 setPW_XOpen 팝업 열기
+      setCODE_OOpen(false); // setPW_OOpen 팝업 닫기
+      setCODE_XOpen(true); // 다른 경우 setPW_XOpen 팝업 열기
       console.log("틀림");
     }
   };
@@ -104,16 +104,17 @@ const RecruitNewGroup = () => {
       );
 
       if (response.status === 409) {
-        setID_XOpen(true);
+        setNAME_XOpen(true);
       } else if (response.status === 200) {
-        setID_OOpen(true);
+        setNAME_OOpen(true);
         //setError(response.msg); // 서버에서 전송된 에러 메시지 설정
       }
     } catch (err) {
       //오류 발생시
       console.error("모임 생성 실패 : ", err);
-
       setError("모임생성 중 오류 발생"); // 일반 에러 메시지 설정
+      setNAME_OOpen(true); // setPW_OOpen 팝업 닫기
+      setNAME_XOpen(false); // 다른 경우 setPW_XOpen 팝업 열기
     }
     return false;
   };
@@ -121,6 +122,8 @@ const RecruitNewGroup = () => {
   // 마지막 확인 -> 데이터 보낼 때
   const handlefinishbutton = async () => {
     setError(null); //에러 초기화
+    const selecteduser_id = localStorage.getItem("userToken");
+    console.log("토큰찍기:", selecteduser_id);
 
     try {
       const response2 = await axios.post(
@@ -129,17 +132,23 @@ const RecruitNewGroup = () => {
           // 서버의 회원가입 endpoint로 POST 요청
           group_name: group_name,
           groupcode: group_code,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${selecteduser_id}`,
+          },
         }
       );
-      if (response2.status === 409) {
-        setID_XOpen(true);
-      } else if (response2.status === 200) {
-        setID_OOpen(true);
-        //setError(err.response.data.error); // 서버에서 전송된 에러 메시지 설정
-      }
+      if (response2.status === 200) {
+        setJoinFinishOpen(true); }
+      // } else if (response2.status === 200) {
+      //   setNAME_OOpen(true);
+      //   //setError(err.response.data.error); // 서버에서 전송된 에러 메시지 설정
+      // }
     } catch (err) {
       //오류 발생시
       console.error("모임 생성 실패 : ", err);
+
       setError("모임생성 중 오류 발생"); // 일반 에러 메시지 설정
     }
     return false;
@@ -234,42 +243,42 @@ const RecruitNewGroup = () => {
           <JoinFinish onClose={closeJoinFinish} />
         </PortalPopup>
       )}
-      {isPW_XOpen && (
+      {isCODE_XOpen && (
         <PortalPopup
           overlayColor="rgba(113, 113, 113, 0.3)"
           placement="Centered"
-          onOutsideClick={closePW_X}
+          onOutsideClick={closeCODE_X}
         >
-          <PW_X onClose={closePW_X} />
+          <CODE_X onClose={closeCODE_X} />
         </PortalPopup>
       )}
-      {isPW_OOpen && (
+      {isCODE_OOpen && (
         <PortalPopup
           overlayColor="rgba(113, 113, 113, 0.3)"
           placement="Centered"
-          onOutsideClick={closePW_O}
+          onOutsideClick={closeCODE_O}
         >
-          <PW_O onClose={closePW_O} />
-        </PortalPopup>
-      )}
-
-      {isID_XOpen && (
-        <PortalPopup
-          overlayColor="rgba(113, 113, 113, 0.3)"
-          placement="Centered"
-          onOutsideClick={closeID_X}
-        >
-          <ID_X onClose={closeID_X} />
+          <CODE_O onClose={closeCODE_O} />
         </PortalPopup>
       )}
 
-      {isID_OOpen && (
+      {isNAME_XOpen && (
         <PortalPopup
           overlayColor="rgba(113, 113, 113, 0.3)"
           placement="Centered"
-          onOutsideClick={closeID_O}
+          onOutsideClick={closeNAME_X}
         >
-          <ID_O onClose={closeID_O} />
+          <NAME_X onClose={closeNAME_X} />
+        </PortalPopup>
+      )}
+
+      {isNAME_OOpen && (
+        <PortalPopup
+          overlayColor="rgba(113, 113, 113, 0.3)"
+          placement="Centered"
+          onOutsideClick={closeNAME_O}
+        >
+          <NAME_O onClose={closeNAME_O} />
         </PortalPopup>
       )}
     </div>
