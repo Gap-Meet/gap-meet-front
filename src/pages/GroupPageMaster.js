@@ -33,7 +33,7 @@ const GroupPageMaster = () => {
   const myArray = [
     // Row 0
     [
-      {"day": "월", "s_time": 12, "e_time": 14, "num":3}
+      {"day": "월", "s_time": 0, "e_time": 24, "num":3}
     ],
     // Row 1
     [
@@ -68,7 +68,7 @@ const GroupPageMaster = () => {
       day=-1;
     }
 
-    for (let i = 0; i < 24; i++) {
+    for (let i = 0; i <= 24; i++) {
         if (myArray[option][0].s_time === i) {
             st = i+1;
         }
