@@ -108,7 +108,7 @@ const GroupPageMaster = () => {
        + myArray[0][0].e_time+":00"],
     [ myArray[1][0].day + "요일 " + myArray[1][0].s_time+":00~"
        + myArray[1][0].e_time+":00"],
-    [ myArray[2][0].day + " 요일 " + myArray[2][0].s_time+":00~"
+    [ myArray[2][0].day + "요일 " + myArray[2][0].s_time+":00~"
        + myArray[2][0].e_time+":00"]
   ];
 

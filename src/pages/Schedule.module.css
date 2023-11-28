@@ -134,5 +134,5 @@
 }
 
 .scheduleActive {
-  background-color: #ffff99 !important; /* 배경색 변경 */
+  background-color: rgb(116, 146, 253) !important; /* 배경색 변경 */
 }

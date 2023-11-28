@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import BinkaniSelect from "./BinkaniSelect";
 import PortalPopup from "./PortalPopup";
 import MyProfile from "./MyProfile";
@@ -6,11 +6,29 @@ import MenuAlarm from "./MenuAlarm";
 import LogoutPopup from "./LogoutPopup";
 import styles from "./Menu.module.css";
 
+
+
 const Menu = ({ onClose }) => {
   const [isBinkaniSelectOpen, setBinkaniSelectOpen] = useState(false);
   const [isMyProfileOpen, setMyProfileOpen] = useState(false);
   const [isMenuAlarmOpen, setMenuAlarmOpen] = useState(false);
   const [isLogoutPopupOpen, setLogoutPopupOpen] = useState(false);
+  const [selectedImageUrl, setSelectedImageUrl] = useState('');
+
+
+  // 컴포넌트가 마운트될 때 로컬 스토리지에서 이미지 URL을 불러오기
+  useEffect(() => {
+    const savedImageUrl = localStorage.getItem('selectedImageUrl');
+    if (savedImageUrl) {
+      setSelectedImageUrl(savedImageUrl);
+    }
+  }, []);
+
+  const handleSelectImage = (imageUrl) => {
+    setSelectedImageUrl(imageUrl);
+    localStorage.setItem('selectedImageUrl', imageUrl); // 로컬 스토리지에 저장
+    setBinkaniSelectOpen(false); // BinkaniSelect 창 닫기
+  };
 
   const openBinkaniSelect = useCallback(() => {
     setBinkaniSelectOpen(true);
@@ -53,7 +71,7 @@ const Menu = ({ onClose }) => {
         <img
           className={styles.navyBinkani1}
           alt=""
-          src="/navy-binkani-2@2x.png"
+          src={selectedImageUrl || '/navy-binkani-2@2x.png'}
           onClick={openBinkaniSelect}
         />
         <img
@@ -79,18 +97,15 @@ const Menu = ({ onClose }) => {
         <PortalPopup
           overlayColor="rgba(113, 113, 113, 0.3)"
           placement="Centered"
-          onOutsideClick={closeBinkaniSelect}
+          onOutsideClick={() => setBinkaniSelectOpen(false)}
         >
-          <BinkaniSelect onClose={closeBinkaniSelect} />
-        </PortalPopup>
-      )}
-      {isMyProfileOpen && (
-        <PortalPopup
-          overlayColor="rgba(113, 113, 113, 0.3)"
-          placement="Centered"
-          onOutsideClick={closeMyProfile}
-        >
-          <MyProfile onClose={closeMyProfile} />
+          {/* <BinkaniSelect 
+            onSelectImage={(imageUrl) => {
+              setSelectedImageUrl(imageUrl); // 이미지 URL 설정
+              closeBinkaniSelect(); // BinkaniSelect 창 닫기
+            }} 
+          /> */}
+          <BinkaniSelect onSelectImage={handleSelectImage} />
         </PortalPopup>
       )}
       {isMenuAlarmOpen && (
