@@ -8,7 +8,6 @@ import axios from "axios";
 
 const LoginPage = () => {
   const navigate = useNavigate();
-
   const onText1Click = useCallback(() => {
     navigate("/join");
   }, [navigate]);

@@ -1,0 +1,24 @@
+.div1 {
+  position: absolute;
+  top: 58px;
+  left: 41px;
+}
+.div2 {
+position: absolute;
+top: 81px;
+left: 61px;
+
+}
+.Yes_Button {
+position: relative;
+background-color: var(--color-gray-300);
+width: 284px;
+height: 163px;
+overflow: hidden;
+max-width: 100%;
+max-height: 100%;
+text-align: center;
+font-size: var(--font-size-xl);
+color: var(--color-black);
+font-family: var(--font-nexon-lv1-gothic-low-otf);
+}

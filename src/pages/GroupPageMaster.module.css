@@ -218,7 +218,6 @@
   text-align: left;
   font-size: var(--font-size-21xl);
   color: var(--color-midnightblue-100);
-  
   font-family: var(--font-nexon-lv1-gothic-low-otf);
 }
 
@@ -240,12 +239,11 @@
   /* border: 1px solid #ffffff; */
   /* border: 1px; */
   padding: 6.71px;
-  width: 5px; 
+  width: 5px;
   text-align: center;
   background: transparent; /* 셀 배경을 투명하게 설정 */
   color: transparent; /* Make font color transparent */
   /* border: 1px solid rgb(255, 0, 0); */
- 
 }
 
 /* 왼쪽상단 구석 1,1 부터

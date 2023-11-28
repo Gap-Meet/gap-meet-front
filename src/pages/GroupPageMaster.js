@@ -108,7 +108,7 @@ const GroupPageMaster = () => {
        + myArray[0][0].e_time+":00"],
     [ myArray[1][0].day + "요일 " + myArray[1][0].s_time+":00~"
        + myArray[1][0].e_time+":00"],
-    [ myArray[2][0].day + " 요일 " + myArray[2][0].s_time+":00~"
+    [ myArray[2][0].day + "요일 " + myArray[2][0].s_time+":00~"
        + myArray[2][0].e_time+":00"]
   ];
 
@@ -139,7 +139,6 @@ const GroupPageMaster = () => {
           src="/vector.svg"
           onClick={openMeetingOption}
         />
-
         <table className={styles.Table}>
           <tr>
             <td></td>
@@ -186,7 +185,6 @@ const GroupPageMaster = () => {
               click 버튼 눌리면 -> 선택했다는 것을 백으로 넘겨주기.
               */}
 
-
         <div className={styles.timeSelectButton1}>
           <div className={styles.timeSelectButtonChild} />
           <div className={styles.div5} onClick={() => getIndex(1)}>
@@ -232,8 +230,6 @@ const GroupPageMaster = () => {
           <MeetingOption onClose={closeMeetingOption} />
         </PortalPopup>
       )}
-
-
     </>
   );
 };
